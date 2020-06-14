@@ -7,7 +7,7 @@ import { Card } from "../components/Card"
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
-    <h1>Hi, I'm Ian</h1>
+    {/* <h1>Hi, I'm Ian</h1> */}
     <Card/>
   </Layout>
 )

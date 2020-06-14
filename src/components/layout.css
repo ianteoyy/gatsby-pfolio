@@ -10,6 +10,11 @@ body {
   height: 100vh;
   overflow-y: hidden;
 }
+@media (max-width: 768px) {
+  body {
+    overflow-y: auto;
+  }
+}
 article,
 aside,
 details,
@@ -189,7 +194,7 @@ textarea {
 html {
   font: 112.5%/1.45em georgia, serif;
   box-sizing: border-box;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 * {
   box-sizing: inherit;

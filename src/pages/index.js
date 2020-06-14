@@ -1,4 +1,5 @@
 import React from "react"
+import { Container } from "react-bootstrap"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -8,7 +9,9 @@ const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
     {/* <h1>Hi, I'm Ian</h1> */}
-    <Card/>
+    <Container className="d-flex justify-content-center">
+      <Card />
+    </Container>
   </Layout>
 )
 

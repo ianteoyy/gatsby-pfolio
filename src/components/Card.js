@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useRef, useEffect } from "react"
 import styled from "styled-components"
 import { graphql, useStaticQuery } from "gatsby"
 import Img from "gatsby-image"
@@ -25,6 +25,13 @@ const CardLink = styled.a`
     display: flex;
     justify-content: center;
   }
+
+  /* fade-in styles*/
+  opacity: ${({ isVisible }) => (isVisible ? "1" : "0")};
+  transform: ${({ isVisible }) => (isVisible ? "none" : "translateY(20%)")};
+  visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  will-change: opacity, visibility;
 `
 
 const StyledCard = styled.div`
@@ -39,6 +46,14 @@ const StyledCard = styled.div`
   align-items: center;
   padding: 1rem 0.5rem;
   margin: 0 1rem;
+
+  &:hover {
+    position: relative;
+    top: 1px;
+    left: 2px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px -1px 3px,
+      inset rgba(0, 0, 0, 0.1) 0px 1px 2px;
+  }
 
   @media (max-width: 768px) {
     width: 80%;
@@ -72,6 +87,8 @@ const GitLink = styled.a`
 `
 
 export const Card = () => {
+  const [isVisible, setIsVisible] = useState(false)
+  const visibleRef = useRef()
   const { allFile } = useStaticQuery(graphql`
     {
       allFile(
@@ -99,9 +116,23 @@ export const Card = () => {
     }
   `)
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => setIsVisible(entry.isIntersecting))
+    })
+    observer.observe(visibleRef.current)
+    return () => observer.unobserve(visibleRef.current)
+  }, [])
+
   return (
     <CardContainer>
-      <CardLink href="https://nextyy.netlify.app" target="_blank">
+      <CardLink
+        href="https://nextyy.netlify.app"
+        target="_blank"
+        rel="noreferrer"
+        ref={visibleRef}
+        isVisible={isVisible}
+      >
         <StyledCard>
           <h3>Nextagram</h3>
           <ImageContainer>
@@ -131,18 +162,32 @@ export const Card = () => {
           </p>
           <p>
             If the cat doesn't stop spinning, try clicking{" "}
-            <a href="https://insta.nextacademy.com/api/v1/users/" target="_blank">
+            <a
+              href="https://insta.nextacademy.com/api/v1/users/"
+              target="_blank"
+              rel="noreferrer"
+            >
               <b>this link</b>
             </a>{" "}
             and allow the certificate.
           </p>
-          <GitLink href="https://github.com/ianteoyy/nextagram" target="_blank">
+          <GitLink
+            href="https://github.com/ianteoyy/nextagram"
+            target="_blank"
+            rel="noreferrer"
+          >
             Github
           </GitLink>
         </StyledCard>
       </CardLink>
 
-      <CardLink href="https://tw-swarbox.netlify.app" target="_blank">
+      <CardLink
+        href="https://tw-swarbox.netlify.app"
+        target="_blank"
+        rel="noreferrer"
+        ref={visibleRef}
+        isVisible={isVisible}
+      >
         <StyledCard>
           <h3>SW Database</h3>
           <ImageContainer>
@@ -169,15 +214,26 @@ export const Card = () => {
           <Separator />
           <p>
             Friend's project where I assisted with parts of React code and
-            database structure. View my commits to see which parts I helped with.
+            database structure. View my commits to see which parts I helped
+            with.
           </p>
-          <GitLink href="https://github.com/ericltwee/SW-react" target="_blank">
+          <GitLink
+            href="https://github.com/ericltwee/SW-react"
+            target="_blank"
+            rel="noreferrer"
+          >
             Github
           </GitLink>
         </StyledCard>
       </CardLink>
 
-      <CardLink href="https://splits.netlify.app" target="_blank">
+      <CardLink
+        href="https://splits.netlify.app"
+        target="_blank"
+        rel="noreferrer"
+        ref={visibleRef}
+        isVisible={isVisible}
+      >
         <StyledCard>
           <h3>Splits</h3>
           <ImageContainer>
@@ -210,6 +266,7 @@ export const Card = () => {
           <GitLink
             href="https://github.com/whoabe/splits-react"
             target="_blank"
+            rel="noreferrer"
           >
             Github
           </GitLink>

@@ -10,11 +10,12 @@ body {
   height: 100vh;
   overflow-y: hidden;
 }
-@media (max-width: 768px) {
+@media (max-width: 768px), (max-height: 650px) {
   body {
     overflow-y: auto;
   }
 }
+
 article,
 aside,
 details,

@@ -32,7 +32,7 @@ const StyledCard = styled.div`
   box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px,
     inset rgba(0, 0, 0, 0.2) 0px -1px 2px;
   border-radius: 20px;
-  height: 60vh;
+  min-height: 60vh;
   width: 25vw;
   display: flex;
   flex-direction: column;
@@ -131,7 +131,7 @@ export const Card = () => {
           </p>
           <p>
             If the cat doesn't stop spinning, try clicking{" "}
-            <a href="https://insta.nextacademy.com/api/v1/users/">
+            <a href="https://insta.nextacademy.com/api/v1/users/" target="_blank">
               <b>this link</b>
             </a>{" "}
             and allow the certificate.

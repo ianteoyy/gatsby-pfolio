@@ -83,8 +83,9 @@ export const ProjectCard = ({ title, link, images, tagLine, desc, git }) => {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => setIsVisible(entry.isIntersecting))
     })
+    const currentRef = visibleRef.current
     observer.observe(visibleRef.current)
-    return () => observer.unobserve(visibleRef.current)
+    return () => observer.unobserve(currentRef)
   }, [])
 
   return (
@@ -105,9 +106,8 @@ export const ProjectCard = ({ title, link, images, tagLine, desc, git }) => {
             indicators={false}
           >
             {images.map(image => (
-              <Carousel.Item>
+              <Carousel.Item key={image.node.base.split(".")[0]}>
                 <Img
-                  key={image.node.base.split(".")[0]}
                   fluid={image.node.childImageSharp.fluid}
                   alt={image.node.base.split(".")[0]}
                 />

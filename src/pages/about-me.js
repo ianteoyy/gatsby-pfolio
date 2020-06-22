@@ -8,7 +8,7 @@ import {
   Tooltip,
 } from "react-bootstrap"
 import Img from "gatsby-image"
-import styled from "styled-components"
+import styled, { keyframes, css } from "styled-components"
 import { graphql, useStaticQuery } from "gatsby"
 
 import Layout from "../components/layout"
@@ -24,8 +24,39 @@ const WallOfText = styled(Row)`
   }
 `
 
+const bounceUp = keyframes`
+  0% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(0, -10px);
+  }
+
+  100% {
+    transform: translate(0, 0px);
+  }
+`
+
+const bouncingAnimation = css`
+  animation-name: ${bounceUp};
+  animation-duration: 1s;
+`
+
+const BouncingImg = styled.img`
+  animation-duration: 0.6s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+  ${props => props.notClickedYet && bouncingAnimation};
+
+  :hover {
+    animation-name: ${bounceUp};
+  }
+`
+
 const AboutMe = () => {
   const [showIntro, setShowIntro] = useState("")
+  const [notClickedYet, setNotClickedYet] = useState(true)
   const { me, skillIcons, contactIcons } = useStaticQuery(graphql`
     query {
       me: allFile(filter: { relativePath: { glob: "me.jpg" } }) {
@@ -88,6 +119,9 @@ const AboutMe = () => {
   `)
 
   const handleAboutMeIcons = button => {
+    if (notClickedYet) {
+      setNotClickedYet(false)
+    }
     switch (button) {
       case "intro":
         showIntro === "intro" ? setShowIntro("") : setShowIntro("intro")
@@ -124,13 +158,14 @@ const AboutMe = () => {
                   placement={"top"}
                   overlay={<Tooltip>Stuff about me!</Tooltip>}
                 >
-                  <img
+                  <BouncingImg
                     src={intro}
                     alt="stuff about me"
                     onClick={() => handleAboutMeIcons("intro")}
                     onKeyDown={event =>
                       isSpaceOrEnter(event.key) && handleAboutMeIcons("intro")
                     } // not sure if this is doing anything
+                    notClickedYet={notClickedYet}
                   />
                 </OverlayTrigger>
               </Col>
@@ -139,14 +174,15 @@ const AboutMe = () => {
                   placement={"top"}
                   overlay={<Tooltip>My coding experience</Tooltip>}
                 >
-                  <img
+                  <BouncingImg
                     src={code}
                     alt="my coding experience so far"
                     onClick={() => handleAboutMeIcons("experience")}
                     onKeyDown={event =>
                       isSpaceOrEnter(event.key) &&
                       handleAboutMeIcons("experience")
-                    } // not sure if this is doing anything}
+                    } // not sure if this is doing anything
+                    notClickedYet={notClickedYet}
                   />
                 </OverlayTrigger>
               </Col>
@@ -155,13 +191,14 @@ const AboutMe = () => {
                   placement={"top"}
                   overlay={<Tooltip>Languages I know</Tooltip>}
                 >
-                  <img
+                  <BouncingImg
                     src={language}
                     alt="languages I know"
                     onClick={() => handleAboutMeIcons("language")}
                     onKeyDown={event =>
                       isSpaceOrEnter(event.key) && handleAboutMeIcons("intro")
                     } // not sure if this is doing anything
+                    notClickedYet={notClickedYet}
                   />
                 </OverlayTrigger>
               </Col>

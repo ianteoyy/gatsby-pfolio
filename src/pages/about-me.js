@@ -1,5 +1,12 @@
 import React, { useState } from "react"
-import { Container, Row, Col, Collapse } from "react-bootstrap"
+import {
+  Container,
+  Row,
+  Col,
+  Collapse,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap"
 import Img from "gatsby-image"
 import styled from "styled-components"
 import { graphql, useStaticQuery } from "gatsby"
@@ -9,6 +16,7 @@ import SEO from "../components/seo"
 import code from "../images/personal/code.png"
 import intro from "../images/personal/intro.png"
 import language from "../images/personal/language.png"
+import { isSpaceOrEnter } from "../util.js"
 
 const WallOfText = styled(Row)`
   p {
@@ -112,25 +120,50 @@ const AboutMe = () => {
           <Col md={6}>
             <WallOfText>
               <Col lg={2} md={3} sm={2} xs={3}>
-                <img
-                  src={intro}
-                  alt="stuff about me"
-                  onClick={() => handleAboutMeIcons("intro")}
-                />
+                <OverlayTrigger
+                  placement={"top"}
+                  overlay={<Tooltip>Stuff about me!</Tooltip>}
+                >
+                  <img
+                    src={intro}
+                    alt="stuff about me"
+                    onClick={() => handleAboutMeIcons("intro")}
+                    onKeyDown={event =>
+                      isSpaceOrEnter(event.key) && handleAboutMeIcons("intro")
+                    } // not sure if this is doing anything
+                  />
+                </OverlayTrigger>
               </Col>
               <Col lg={2} md={3} sm={2} xs={3}>
-                <img
-                  src={code}
-                  alt="my coding experience so far"
-                  onClick={() => handleAboutMeIcons("experience")}
-                />
+                <OverlayTrigger
+                  placement={"top"}
+                  overlay={<Tooltip>My coding experience</Tooltip>}
+                >
+                  <img
+                    src={code}
+                    alt="my coding experience so far"
+                    onClick={() => handleAboutMeIcons("experience")}
+                    onKeyDown={event =>
+                      isSpaceOrEnter(event.key) &&
+                      handleAboutMeIcons("experience")
+                    } // not sure if this is doing anything}
+                  />
+                </OverlayTrigger>
               </Col>
               <Col lg={2} md={3} sm={2} xs={3}>
-                <img
-                  src={language}
-                  alt="languages I know"
-                  onClick={() => handleAboutMeIcons("language")}
-                />
+                <OverlayTrigger
+                  placement={"top"}
+                  overlay={<Tooltip>Languages I know</Tooltip>}
+                >
+                  <img
+                    src={language}
+                    alt="languages I know"
+                    onClick={() => handleAboutMeIcons("language")}
+                    onKeyDown={event =>
+                      isSpaceOrEnter(event.key) && handleAboutMeIcons("intro")
+                    } // not sure if this is doing anything
+                  />
+                </OverlayTrigger>
               </Col>
               <Collapse in={showIntro === "intro"}>
                 <div>
@@ -204,7 +237,16 @@ const AboutMe = () => {
               ))}
             </Row>
             <br />
-            <p>Or check out my resume!</p>
+            <p>
+              Or check out{" "}
+              <a
+                href="https://drive.google.com/file/d/15C1FhjP2sgzaKWdrXvkRoul2ckqTJIWQ/view?usp=sharing"
+                target="_blank"
+                rel="noreferrer"
+              >
+                my resume!
+              </a>
+            </p>
           </Col>
         </Row>
       </Container>

@@ -17,6 +17,7 @@ import code from "../images/personal/code.png"
 import intro from "../images/personal/intro.png"
 import language from "../images/personal/language.png"
 import { isSpaceOrEnter } from "../util.js"
+import { AboutIcons } from "../components/AboutIcons"
 
 const WallOfText = styled(Row)`
   p {
@@ -24,7 +25,7 @@ const WallOfText = styled(Row)`
   }
 `
 
-const bounceUp = keyframes`
+const bobUp = keyframes`
   0% {
     transform: translate(0, 0);
   }
@@ -38,6 +39,18 @@ const bounceUp = keyframes`
   }
 `
 
+const bounceUp = keyframes`
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  } 
+  40% {
+    transform: translateY(-10px);
+  } 
+  60% {
+    transform: translateY(-5px);
+  } 
+`
+
 const bouncingAnimation = css`
   animation-name: ${bounceUp};
   animation-duration: 1s;
@@ -48,11 +61,28 @@ const BouncingImg = styled.img`
   animation-timing-function: ease-out;
   animation-iteration-count: infinite;
   ${props => props.notClickedYet && bouncingAnimation};
+  cursor: pointer;
 
   :hover {
-    animation-name: ${bounceUp};
+    animation-name: ${bobUp};
   }
 `
+
+const skillTooltips = [
+  {skill: "HTML", tooltip: "HTML5, Bootstrap 3+ and JS"},
+  {skill: "React", tooltip: "ReactJS (both Class based and hooks)"},
+  {skill: "NPM", tooltip: "Node Package Manager"},
+  {skill: "Yarn", tooltip: "Yarn Package Manager"},
+  {skill: "PostgreSQL", tooltip: "PostgreSQL"},
+  {skill: "Python", tooltip: "Python"},
+  {skill: "Git", tooltip: "Git"}
+]
+
+const contactTooltips = [
+  {contact: "Gmail", tooltip: "Gmail", link: "mailto:teoyeetyang@gmail.com"},
+  {contact: "Github", tooltip: "Github", link: "https://github.com/ianteoyy"},
+  {contact: "LinkedIn", tooltip: "LinkedIn", link: "https://www.linkedin.com/in/ianteoyy"},
+]
 
 const AboutMe = () => {
   const [showIntro, setShowIntro] = useState("")
@@ -252,25 +282,26 @@ const AboutMe = () => {
             </WallOfText>
             <h4>I know these things:</h4>
             <Row className="align-items-center">
-              {skillIcons.edges.map(skill => (
-                <Col lg={2} md={3} sm={2} xs={3}>
-                  <Img
-                    fluid={skill.node.childImageSharp.fluid}
-                    alt={skill.node.base.split(".")[0]}
-                  />
-                </Col>
+              {skillIcons.edges.map((skill, index) => (
+                <AboutIcons
+                  key={skill.node.base}
+                  imageFluid={skill.node.childImageSharp.fluid}
+                  imageAlt={skill.node.base.split(".")[0]}
+                  tooltip={skillTooltips[index].tooltip}
+                />
               ))}
             </Row>
             <br />
             <h4>Find me at:</h4>
             <Row className="align-items-center">
-              {contactIcons.edges.map(contact => (
-                <Col lg={2} md={3} sm={2} xs={3}>
-                  <Img
-                    fluid={contact.node.childImageSharp.fluid}
-                    alt={contact.node.base.split(".")[0]}
-                  />
-                </Col>
+              {contactIcons.edges.map((contact, index) => (
+                <AboutIcons
+                  key={contact.node.base}
+                  imageFluid={contact.node.childImageSharp.fluid}
+                  imageAlt={contact.node.base.split(".")[0]}
+                  tooltip={contactTooltips[index].tooltip}
+                  link={contactTooltips[index].link}
+                />
               ))}
             </Row>
             <br />

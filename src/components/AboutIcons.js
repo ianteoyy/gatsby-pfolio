@@ -12,7 +12,7 @@ const FadingImage = styled(Img)`
 export const AboutIcons = ({ imageFluid, imageAlt, tooltip, link = "" }) => {
   return (
     <OverlayTrigger placement={"top"} overlay={<Tooltip>{tooltip}</Tooltip>}>
-      <Col lg={2} md={3} sm={2} xs={3}>
+      <Col lg={2} md={3} sm={2} xs={2}>
         {withLinkWrapper(
           link,
           <FadingImage fluid={imageFluid} alt={imageAlt} />

@@ -23,6 +23,12 @@ const WallOfText = styled(Row)`
   p {
     font-size: 14px;
   }
+
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
 `
 
 const bobUp = keyframes`

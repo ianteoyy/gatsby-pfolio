@@ -1,0 +1,1 @@
+export const isSpaceOrEnter = (key) => key === " " || key === "Enter"

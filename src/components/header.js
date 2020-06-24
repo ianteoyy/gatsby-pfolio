@@ -63,18 +63,18 @@ const Header = ({ siteTitle }) => (
               textDecoration: `none`,
             }}
           >
-            My Projects
+            About Me
           </Link>
         </h5>
         <h5>
           <Link
-            to="/about-me"
+            to="/projects"
             style={{
               color: `white`,
               textDecoration: `none`,
             }}
           >
-            About Me
+            Projects
           </Link>
         </h5>
       </HeaderRight>

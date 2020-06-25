@@ -1,13 +1,7 @@
-import React, { useState } from "react"
-import {
-  Row,
-  Col,
-  Collapse,
-  OverlayTrigger,
-  Tooltip,
-} from "react-bootstrap"
+import React, { useState, useRef, useEffect } from "react"
+import { Row, Col, Collapse, OverlayTrigger, Tooltip } from "react-bootstrap"
 import Img from "gatsby-image"
-import styled, { keyframes, css } from "styled-components"
+import styled, { css } from "styled-components"
 import { graphql, useStaticQuery } from "gatsby"
 
 import code from "../images/personal/code.png"
@@ -15,6 +9,26 @@ import intro from "../images/personal/intro.png"
 import language from "../images/personal/language.png"
 import { isSpaceOrEnter } from "../util.js"
 import { AboutIcons } from "./AboutIcons"
+import { bounceUp, bobUp } from "../keyframes"
+
+const Left = styled(Col)`
+  /* fade-in styles*/
+  transform: ${({ isVisible }) => (isVisible ? "none" : "translateX(-20%)")};
+  opacity: ${({ isVisible }) => (isVisible ? "1" : "0")};
+    visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    will-change: opacity, visibility;
+`
+
+const Right = styled(Col)`
+  /* fade-in styles*/
+  transform: ${({ isVisible }) => (isVisible ? "none" : "translateX(20%)")};
+  opacity: ${({ isVisible }) => (isVisible ? "1" : "0")};
+    visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    will-change: opacity, visibility;
+  
+  `
 
 const WallOfText = styled(Row)`
   p {
@@ -26,32 +40,6 @@ const WallOfText = styled(Row)`
     justify-content: center;
     margin-top: 2rem;
   }
-`
-
-const bobUp = keyframes`
-  0% {
-    transform: translate(0, 0);
-  }
-
-  50% {
-    transform: translate(0, -10px);
-  }
-
-  100% {
-    transform: translate(0, 0px);
-  }
-`
-
-const bounceUp = keyframes`
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  } 
-  40% {
-    transform: translateY(-10px);
-  } 
-  60% {
-    transform: translateY(-5px);
-  } 
 `
 
 const bouncingAnimation = css`
@@ -96,6 +84,18 @@ const contactTooltips = [
 ]
 
 const AboutMe = () => {
+  const [isVisible, setIsVisible] = useState(false)
+  const visibleRef = useRef()
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => setIsVisible(entry.isIntersecting))
+    })
+    const currentRef = visibleRef.current
+    observer.observe(visibleRef.current)
+    return () => observer.unobserve(currentRef)
+  }, [])
+
   const [showIntro, setShowIntro] = useState("intro")
   const [notClickedYet, setNotClickedYet] = useState(true)
   const { me, skillIcons, contactIcons } = useStaticQuery(graphql`
@@ -183,13 +183,21 @@ const AboutMe = () => {
 
   return (
     <Row>
-      <Col md={6}>
+      <Left 
+        md={6}
+        ref={visibleRef}
+        isVisible={isVisible}
+      >
         <Img
           fluid={me.edges[0].node.childImageSharp.fluid}
           alt={me.edges[0].node.base.split(".")[0]}
         />
-      </Col>
-      <Col md={6}>
+      </Left>
+      <Right 
+        md={6}
+        ref={visibleRef}
+        isVisible={isVisible}
+      >
         <WallOfText>
           <Col lg={2} md={3} sm={2} xs={3}>
             <OverlayTrigger
@@ -247,7 +255,9 @@ const AboutMe = () => {
                 like I wanted to pursue a career in that field, so I moved away
                 from that.
               </p>
-              <small>Click the other bouncy icons to learn more about me!</small>
+              <small>
+                Click the other bouncy icons to learn more about me!
+              </small>
             </div>
           </Collapse>
           <Collapse in={showIntro === "experience"}>
@@ -321,7 +331,7 @@ const AboutMe = () => {
             my resume!
           </a>
         </p>
-      </Col>
+      </Right>
     </Row>
   )
 }

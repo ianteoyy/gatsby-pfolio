@@ -66,6 +66,7 @@ const BouncingImg = styled.img`
 const skillTooltips = [
   { skill: "HTML", tooltip: "HTML5, Bootstrap 3+ and JS" },
   { skill: "React", tooltip: "ReactJS (both Class based and hooks)" },
+  { skill: "Redux", tooltip: "Redux (new skill!!)" },
   { skill: "NPM", tooltip: "Node Package Manager" },
   { skill: "Yarn", tooltip: "Yarn Package Manager" },
   { skill: "PostgreSQL", tooltip: "PostgreSQL" },

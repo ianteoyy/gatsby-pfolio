@@ -49,22 +49,30 @@ export const Projects = () => {
           edge.node.base.startsWith("card-nextyy")
         )}
         tagLine="An Instagram clone"
-        desc={() => <>
-          <p>
-            Built using Next Academy's back-end. Sign up via the Login button!
+        desc={() => (
+          <>
+            <p>
+              Built using Next Academy's back-end as part of their React course.
+              My go-to project to alter when learning new things. Started with
+              using class components, now uses mostly hooks!
             </p>
-          <p>
-            If the cat doesn't stop spinning, try clicking{" "}
-            <a
-              href="https://insta.nextacademy.com/api/v1/users/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <b>this link</b>
-            </a>{" "}
+            <small style={{fontSize: '0.7rem', marginBottom: '1rem'}}>
+              4/7/2020 update: Now restores user sessions and stores them with
+              Redux!
+            </small>
+            <p>
+              If the cat doesn't stop spinning, try clicking{" "}
+              <a
+                href="https://insta.nextacademy.com/api/v1/users/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <b>this link</b>
+              </a>{" "}
               and allow the certificate.
             </p>
-        </>}
+          </>
+        )}
         git="https://github.com/ianteoyy/nextagram"
       />
       <ProjectCard

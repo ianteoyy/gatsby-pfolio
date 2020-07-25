@@ -1,19 +1,16 @@
 import React, { useState, useRef, useEffect } from "react"
 import styled from "styled-components"
-import Img from "gatsby-image"
-import { Carousel } from "react-bootstrap"
+import { Modal } from "react-bootstrap"
+import SitePreview from "./SitePreview"
 
-const CardLink = styled.a`
-  display: inline-block;
-  :link,
-  :visited {
-    color: initial;
-    text-decoration: initial;
-  }
+const CardBox = styled.div`
+  display: block;
   @media (max-width: 768px) {
     display: flex;
     justify-content: center;
   }
+  font-size: 14px;
+  margin-bottom: 1rem;
 
   /* fade-in styles*/
   opacity: ${({ isVisible }) => (isVisible ? "1" : "0")};
@@ -28,7 +25,6 @@ const StyledCard = styled.div`
   box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px,
     inset rgba(0, 0, 0, 0.2) 0px -1px 2px;
   border-radius: 20px;
-  min-height: 60vh;
   width: 25vw;
   display: flex;
   flex-direction: column;
@@ -59,24 +55,13 @@ const StyledCard = styled.div`
   }
 `
 
-const ImageContainer = styled.div`
-  width: 80%;
-`
-const Separator = styled.hr`
-  margin: 0.5em;
-  border-width: 1px;
-  color: #000;
-  width: 90%;
-  margin-bottom: 1rem;
+const Tagline = styled.p`
+  font-size: 0.5em;
+  margin-bottom: unset;
 `
 
-const GitLink = styled.a`
-  margin-top: auto;
-  margin-left: auto;
-  font-size: 16px;
-`
-
-export const ProjectCard = ({ title, link, images, tagLine, desc, git }) => {
+export const ProjectCard = ({ title, link, images, tagLine, desc, git, builtWith }) => {
+  const [showModal, setShowModal] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
   const visibleRef = useRef()
 
@@ -90,39 +75,40 @@ export const ProjectCard = ({ title, link, images, tagLine, desc, git }) => {
   }, [])
 
   return (
-    <CardLink
-      href={link}
-      target="_blank"
-      rel="noreferrer"
-      ref={visibleRef}
-      isVisible={isVisible}
-    >
-      <StyledCard>
-        <h3>{title}</h3>
-        <ImageContainer>
-          <Carousel
-            fade={true}
-            controls={false}
-            interval={1000}
-            indicators={false}
-          >
-            {images.map(image => (
-              <Carousel.Item key={image.node.base.split(".")[0]}>
-                <Img
-                  fluid={image.node.childImageSharp.fluid}
-                  alt={image.node.base.split(".")[0]}
-                />
-              </Carousel.Item>
-            ))}
-          </Carousel>
-        </ImageContainer>
-        <small>{tagLine}</small>
-        <Separator />
-        {desc()}
-        <GitLink href={git} target="_blank" rel="noreferrer">
-          Github
-        </GitLink>
-      </StyledCard>
-    </CardLink>
+    <>
+      <CardBox
+        ref={visibleRef}
+        isVisible={isVisible}
+        onClick={() => setShowModal(true)}
+      >
+        <StyledCard>
+          <h3>{title}</h3>
+          <SitePreview images={images} />
+          <Tagline>{tagLine}</Tagline>
+        </StyledCard>
+      </CardBox>
+      <Modal show={showModal} onHide={() => setShowModal(prev => !prev)}>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <h3>{title}</h3>
+            <Tagline>{tagLine}</Tagline>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <SitePreview images={images}/>
+          <hr/>
+          <p style= {{fontSize: '0.8em'}} className="text-muted">Built with: {builtWith.join(", ")}</p>
+          {desc()}
+        </Modal.Body>
+        <Modal.Footer className="d-flex justify-content-around">
+          <a href={git} target="_blank" rel="noreferrer">
+            Github
+          </a>
+          <a href={link} target="_blank" rel="noreferrer">
+            Visit site
+          </a>
+        </Modal.Footer>
+      </Modal>
+    </>
   )
 }

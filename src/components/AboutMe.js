@@ -15,20 +15,19 @@ const Left = styled(Col)`
   /* fade-in styles*/
   transform: ${({ isVisible }) => (isVisible ? "none" : "translateX(-20%)")};
   opacity: ${({ isVisible }) => (isVisible ? "1" : "0")};
-    visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-    will-change: opacity, visibility;
+  visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  will-change: opacity, visibility;
 `
 
 const Right = styled(Col)`
   /* fade-in styles*/
   transform: ${({ isVisible }) => (isVisible ? "none" : "translateX(20%)")};
   opacity: ${({ isVisible }) => (isVisible ? "1" : "0")};
-    visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-    will-change: opacity, visibility;
-  
-  `
+  visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  will-change: opacity, visibility;
+`
 
 const WallOfText = styled(Row)`
   p {
@@ -64,11 +63,13 @@ const BouncingImg = styled.img`
 `
 
 const skillTooltips = [
-  { skill: "HTML", tooltip: "HTML5, Bootstrap 3+ and JS" },
-  { skill: "React", tooltip: "ReactJS (both Class based and hooks)" },
-  { skill: "Redux", tooltip: "Redux (new skill!!)" },
-  { skill: "NPM", tooltip: "Node Package Manager" },
-  { skill: "Yarn", tooltip: "Yarn Package Manager" },
+  { skill: "Bootstrap", tooltip: "Bootstrap 4.5" },
+  { skill: "HTML", tooltip: "HTML, CSS and JS" },
+  { skill: "React", tooltip: "ReactJS (Class & Hooks)" },
+  { skill: "Redux", tooltip: "Redux" },
+  { skill: "NestJS", tooltip: "Nest JS" },
+  { skill: "NPM", tooltip: "NPM" },
+  { skill: "Yarn", tooltip: "Yarn" },
   { skill: "PostgreSQL", tooltip: "PostgreSQL" },
   { skill: "Python", tooltip: "Python" },
   { skill: "Git", tooltip: "Git" },
@@ -101,7 +102,7 @@ const AboutMe = () => {
   const [notClickedYet, setNotClickedYet] = useState(true)
   const { me, skillIcons, contactIcons } = useStaticQuery(graphql`
     query {
-      me: allFile(filter: { relativePath: { glob: "me.jpg" } }) {
+      me: allFile(filter: { relativePath: { glob: "me.png" } }) {
         edges {
           node {
             base
@@ -184,21 +185,13 @@ const AboutMe = () => {
 
   return (
     <Row>
-      <Left 
-        md={6}
-        ref={visibleRef}
-        isVisible={isVisible}
-      >
+      <Left md={6} ref={visibleRef} isVisible={isVisible}>
         <Img
           fluid={me.edges[0].node.childImageSharp.fluid}
           alt={me.edges[0].node.base.split(".")[0]}
         />
       </Left>
-      <Right 
-        md={6}
-        ref={visibleRef}
-        isVisible={isVisible}
-      >
+      <Right md={6} ref={visibleRef} isVisible={isVisible}>
         <WallOfText>
           <Col lg={2} md={3} sm={2} xs={3}>
             <OverlayTrigger
@@ -297,6 +290,7 @@ const AboutMe = () => {
             </div>
           </Collapse>
         </WallOfText>
+        <hr />
         <h4>I know these things:</h4>
         <Row className="align-items-center">
           {skillIcons.edges.map((skill, index) => (
@@ -308,7 +302,7 @@ const AboutMe = () => {
             />
           ))}
         </Row>
-        <br />
+        <hr />
         <h4>Find me at:</h4>
         <Row className="align-items-center">
           {contactIcons.edges.map((contact, index) => (

@@ -7,6 +7,7 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--dark);
 }
 
 p, small, footer, a, h1, h2, h3, h4, h5 {

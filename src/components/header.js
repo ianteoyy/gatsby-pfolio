@@ -3,13 +3,19 @@ import PropTypes from "prop-types"
 import React from "react"
 import styled from "styled-components"
 
-const HeaderContainer = styled.div`
+const HeaderContainer = styled.header`
   margin: 0 auto;
   max-width: 960px;
   padding: 1.45rem 1.0875rem;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: flex-end;
+
+  background-color: none;
+  position: sticky;
+  top: 0;
+  z-index: 1240;
+  margin-bottom: 1em;
 
   > h1 {
     margin-right: auto;
@@ -33,53 +39,28 @@ const HeaderRight = styled.div`
   height: 100%;
   justify-content: space-between;
   align-items: center;
-`;
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1rem`,
-    }}
-  >
+  *:not(:last-child) {
+    margin-right: 1em;
+  }
+`
+
+const StyledLink = styled(Link)`
+  color: white;
+  text-decoration: none;
+`
+
+const Header = () => (
     <HeaderContainer>
-      <h1>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
       <HeaderRight>
-        <h5>
-          <Link
-            to="/"
-            style={{
-              color: `white`,
-              textDecoration: `none`,
-            }}
-          >
-            About Me
-          </Link>
-        </h5>
-        <h5>
-          <Link
-            to="/projects"
-            style={{
-              color: `white`,
-              textDecoration: `none`,
-            }}
-          >
-            Projects
-          </Link>
-        </h5>
+        <h3>
+          <StyledLink to="/">About Me</StyledLink>
+        </h3>
+        <h3>
+          <StyledLink to="/projects">Projects</StyledLink>
+        </h3>
       </HeaderRight>
     </HeaderContainer>
-  </header>
 )
 
 Header.propTypes = {

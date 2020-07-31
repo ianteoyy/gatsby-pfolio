@@ -11,6 +11,10 @@ body {
   background-color: #1b1c1e;
 }
 
+section {
+  padding-top: 3rem;
+}
+
 p, small, footer, a, h1, h2, h3, h4, h5 {
   font-family: "Josefin Sans";
 }

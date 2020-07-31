@@ -30,7 +30,7 @@ export const ProjectCard = ({
         >
           Built with: {builtWith.join(", ")}
         </p>
-        <div>
+        <div className="mb-3 mb-lg-0">
           <a
             className="cta-btn cta-btn--hero"
             href={link}

@@ -2,8 +2,7 @@ import React, { forwardRef } from "react"
 import { graphql, useStaticQuery } from "gatsby"
 
 import { ProjectCard } from "./ProjectCard"
-import Referral from "./Referral"
-import { CardContainer, ProjectsSection } from "./ProjectsStyles"
+import { ProjectsSection } from "./ProjectsStyles"
 import { Container } from "react-bootstrap"
 
 const Projects = forwardRef((props, ref) => {

@@ -1,10 +1,8 @@
-import { Row } from "react-bootstrap"
 import styled from "styled-components"
 
 export const ProjectsSection = styled.section`
   padding-bottom: 15%;
   background: var(--light);
-  /* background: linear-gradient(135deg, #1b1c1e, var(--gray-dark)); */
   > h2 {
     font-size: 3rem;
   }

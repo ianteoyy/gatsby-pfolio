@@ -1,8 +1,9 @@
 import React, { useRef } from "react"
 
 import Landing from "../components/Landing"
-import { Projects } from "../components/Projects"
-import { ProjectsSection } from "../components/ProjectsStyles"
+import Projects from "../components/Projects"
+import Contact from "../components/Contact"
+import SEO from "../components/seo"
 
 const IndexPage = () => {
   const projectRef = useRef()
@@ -13,11 +14,10 @@ const IndexPage = () => {
 
   return (
     <>
+      <SEO />
       <Landing scrollToProjects={scrollToProjects} />
-      <ProjectsSection ref={projectRef} className="text-center">
-        <Projects />
-      </ProjectsSection>
-      <div style={{ height: "200vh" }} />
+      <Projects ref={projectRef} />
+      <Contact />
     </>
   )
 }

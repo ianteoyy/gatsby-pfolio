@@ -4,18 +4,20 @@ import React from "react"
 import styled from "styled-components"
 
 const HeaderContainer = styled.header`
+  width: 100%;
+  /* background-color: var(--dark); */
+  position: fixed;
+  top: 0;
+  z-index: 1240;
+`
+
+const HeaderContent = styled.div`
   margin: 0 auto;
   max-width: 960px;
   padding: 1.45rem 1.0875rem;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-
-  background-color: none;
-  position: sticky;
-  top: 0;
-  z-index: 1240;
-  margin-bottom: 1em;
 
   > h1 {
     margin-right: auto;
@@ -40,6 +42,10 @@ const HeaderRight = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  h3 {
+    margin-bottom: 0;
+  }
+
   *:not(:last-child) {
     margin-right: 1em;
   }
@@ -51,7 +57,8 @@ const StyledLink = styled(Link)`
 `
 
 const Header = () => (
-    <HeaderContainer>
+  <HeaderContainer>
+    <HeaderContent>
       <HeaderRight>
         <h3>
           <StyledLink to="/">About Me</StyledLink>
@@ -60,7 +67,8 @@ const Header = () => (
           <StyledLink to="/projects">Projects</StyledLink>
         </h3>
       </HeaderRight>
-    </HeaderContainer>
+    </HeaderContent>
+  </HeaderContainer>
 )
 
 Header.propTypes = {

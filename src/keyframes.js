@@ -25,3 +25,17 @@ export const bounceUp = keyframes`
     transform: translateY(-5px);
   } 
 `
+
+export const bobDown = keyframes`
+  0% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(0, 10px);
+  }
+
+  100% {
+    transform: translate(0, 0px);
+  }
+`

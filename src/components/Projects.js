@@ -1,21 +1,11 @@
-import React from "react"
-import styled from "styled-components"
+import React, { forwardRef } from "react"
 import { graphql, useStaticQuery } from "gatsby"
+
 import { ProjectCard } from "./ProjectCard"
-import Referral from "./Referral"
+import { ProjectsSection } from "./ProjectsStyles"
+import { Container } from "react-bootstrap"
 
-const CardContainer = styled.div`
-  margin-bottom: 1rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-
-  @media (max-width: 768px) {
-    grid-template-columns: unset;
-    width: 100%;
-  }
-`
-
-export const Projects = () => {
+const Projects = forwardRef((props, ref) => {
   const { allFile } = useStaticQuery(graphql`
     {
       allFile(
@@ -43,140 +33,72 @@ export const Projects = () => {
     }
   `)
   return (
-    <CardContainer>
-      <ProjectCard
-        title="kuvira-M"
-        builtWith={["HTML5", "SCSS", "Bootstrap 4", "jQuery"]}
-        link="https://kuvira-M.netlify.app"
-        images={allFile.edges.filter(edge =>
-          edge.node.base.startsWith("card-kuvira")
-        )}
-        tagLine="An online store mockup"
-        desc={() => (
-          <>
+    <ProjectsSection ref={ref}>
+      <h2>Stuff I've worked on</h2>
+      <Container>
+        <ProjectCard
+          title="kuvira-M"
+          builtWith={["HTML5", "SCSS", "Bootstrap 4", "jQuery"]}
+          link="https://kuvira-M.netlify.app"
+          images={allFile.edges.filter(edge =>
+            edge.node.base.startsWith("card-kuvira")
+          )}
+          tagLine="An online store mockup"
+          desc={() => (
             <p>
-              Built this as an interview assignment. I was only allowed to use
-              the Bootstrap 4 and jQuery packages and no others. Site design and
-              layout was provided to me in jpegs so I can't take credit for the
-              design!!
+              An online storefront I was assigned to do for a front-end
+              interview. It was done purely in HTML, CSS, and JS without
+              libraries like React. Site design and layout was provided to me in
+              jpegs.
             </p>
-            <p>
-              Pictures found in{" "}
-              <a
-                href="https://www.pexels.com"
-                target="_blank"
-                rel="noreferrer"
-                alt="Pexels"
-              >
-                Pexels
-              </a>
-            </p>
-            <p>
-              <small>
-                Picture credits: <Referral handleName="@meduzakos" />
-                <Referral handleName="@steinportraits" />
-                <Referral handleName="@brunosalvadori" />
-                <Referral handleName="@mentatdgt-330508" />
-                <Referral handleName="@wancukz" />
-                <Referral handleName="@eliasdecarvalho" />
-                <Referral handleName="@rhiannonstone" />
-                <Referral handleName="@elijahsad" />
-                <Referral handleName="@soldiervip" />
-                <Referral handleName="@pixabay" />
-                <Referral handleName="@olly" />
-                <Referral handleName="@myca" />
-                <Referral handleName="@arnie-chou-304906" />
-                <Referral handleName="@black-star-151202" />
-                <Referral handleName="@eulucasqueiroz" />
-                <Referral handleName="@anastasiya-gepp-654466" />
-                <Referral handleName="@postiglioni" />
-                <Referral handleName="@athena" />
-                <Referral handleName="@ngqah83" />
-                <Referral handleName="@scottwebb" />
-              </small>
-            </p>
-          </>
-        )}
-        git="https://github.com/ianteoyy/kuvira-m"
-      />
-      <ProjectCard
-        title="Orders-React"
-        link="https://orders-react.netlify.app"
-        builtWith={["ReactJS", "Redux", "NestJS", "MongoDB"]}
-        images={allFile.edges.filter(edge =>
-          edge.node.base.startsWith("card-orders")
-        )}
-        tagLine="Ordering system front-end"
-        desc={() => (
-          <>
-            <p>
-              Another interview assignment! This one involved building a NodeJS
-              backend of my choosing (I went with NestJS, which was new for me)
-              to manage orders and payments.
-            </p>
-            <p>
-              For the database, I used MongoDB Atlas since I figured, "hey two
-              birds with one stone!" So now I have a basic understanding of the
-              MERN stack!
-            </p>
-            <p>
-              If you'd like to check out the code for the NestJS backend,{" "}
-              <a
-                href="https://github.com/ianteoyy/ordersystem"
-                target="_blank"
-                rel="noreferrer"
-                alt="Order System github"
-              >
-                here's its Github page.
-              </a>
-            </p>
-          </>
-        )}
-        git="https://github.com/whoabe/splits-react"
-      />
-      <ProjectCard
-        title="Nextagram"
-        builtWith={["ReactJS", "Redux"]}
-        link="https://nextyy.netlify.app"
-        images={allFile.edges.filter(edge =>
-          edge.node.base.startsWith("card-nextyy")
-        )}
-        tagLine="An Instagram clone"
-        desc={() => (
-          <>
-            <p>
-              An Instagram clone single-page-app I built using Next Academy's
-              back-end as part of their React course. My go-to project to alter
-              when learning new things. Started with using class components, now
-              uses mostly hooks!
-            </p>
-            <small style={{ fontSize: "0.7rem", marginBottom: "1rem" }}>
-              4/7/2020 update: Now restores user sessions and stores them with
-              Redux!
-            </small>
-          </>
-        )}
-        git="https://github.com/ianteoyy/nextagram"
-      />
-      <ProjectCard
-        title="Splits"
-        builtWith={["ReactJS", "Python (Peewee & Flask)", "PostgreSQL"]}
-        link="https://splits.netlify.app"
-        images={allFile.edges.filter(edge =>
-          edge.node.base.startsWith("card-splits")
-        )}
-        tagLine="A simple bill splitter"
-        desc={() => (
-          <>
-            <p>
-              Final project from Next Academy. A simple bill splitter. Back-end
-              built by my teammate using Python, Google Cloud Vision to read the
-              images, and front-end with React.
-            </p>
-          </>
-        )}
-        git="https://github.com/whoabe/splits-react"
-      />
-    </CardContainer>
+          )}
+          git="https://github.com/ianteoyy/kuvira-m"
+        />
+        <ProjectCard
+          title="Orders-React"
+          link="https://orders-react.netlify.app"
+          builtWith={["ReactJS", "Redux", "NestJS", "MongoDB"]}
+          images={allFile.edges.filter(edge =>
+            edge.node.base.startsWith("card-orders")
+          )}
+          tagLine="Ordering system front-end"
+          desc={() => (
+            <>
+              <p>
+                Another interview assignment where I had to build an order and
+                payment system using a NodeJS backend of my choosing. I went
+                with NestJS and MongoDB, both of which were new to me.
+              </p>
+            </>
+          )}
+          git="https://github.com/ianteoyy/orders-react"
+        />
+        <ProjectCard
+          title="Nextagram"
+          builtWith={["ReactJS", "Redux"]}
+          link="https://nextyy.netlify.app"
+          images={allFile.edges.filter(edge =>
+            edge.node.base.startsWith("card-nextyy")
+          )}
+          tagLine="An Instagram clone"
+          desc={() => (
+            <>
+              <p>
+                An Instagram clone single-page-app I built using Next Academy's
+                back-end as part of their React course. Started with using class
+                components, now uses mostly hooks!
+              </p>
+              <p style={{ fontSize: "0.7rem", marginBottom: "1rem" }}>
+                  4/7/2020 update: Now restores user sessions and stores them
+                  with Redux!
+              </p>
+            </>
+          )}
+          git="https://github.com/ianteoyy/nextagram"
+        />
+      </Container>
+    </ProjectsSection>
   )
-}
+})
+
+export default Projects

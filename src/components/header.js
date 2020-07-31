@@ -3,13 +3,21 @@ import PropTypes from "prop-types"
 import React from "react"
 import styled from "styled-components"
 
-const HeaderContainer = styled.div`
+const HeaderContainer = styled.header`
+  width: 100%;
+  /* background-color: var(--dark); */
+  position: fixed;
+  top: 0;
+  z-index: 1240;
+`
+
+const HeaderContent = styled.div`
   margin: 0 auto;
   max-width: 960px;
   padding: 1.45rem 1.0875rem;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: flex-end;
 
   > h1 {
     margin-right: auto;
@@ -33,53 +41,34 @@ const HeaderRight = styled.div`
   height: 100%;
   justify-content: space-between;
   align-items: center;
-`;
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1rem`,
-    }}
-  >
-    <HeaderContainer>
-      <h1>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
+  h3 {
+    margin-bottom: 0;
+  }
+
+  *:not(:last-child) {
+    margin-right: 1em;
+  }
+`
+
+const StyledLink = styled(Link)`
+  color: white;
+  text-decoration: none;
+`
+
+const Header = () => (
+  <HeaderContainer>
+    <HeaderContent>
       <HeaderRight>
-        <h5>
-          <Link
-            to="/"
-            style={{
-              color: `white`,
-              textDecoration: `none`,
-            }}
-          >
-            About Me
-          </Link>
-        </h5>
-        <h5>
-          <Link
-            to="/projects"
-            style={{
-              color: `white`,
-              textDecoration: `none`,
-            }}
-          >
-            Projects
-          </Link>
-        </h5>
+        <h3>
+          <StyledLink to="/">About Me</StyledLink>
+        </h3>
+        <h3>
+          <StyledLink to="/projects">Projects</StyledLink>
+        </h3>
       </HeaderRight>
-    </HeaderContainer>
-  </header>
+    </HeaderContent>
+  </HeaderContainer>
 )
 
 Header.propTypes = {

@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Hi, I'm Ian`,
-    description: `Yup. Ian.`,
+    description: `Ian Teo's Portfolio`,
     author: `ian`,
   },
   plugins: [
@@ -16,6 +16,7 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-scroll-reveal`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

@@ -1,27 +1,22 @@
 import React from "react"
 import { Carousel } from "react-bootstrap"
-import styled from "styled-components"
 import Img from "gatsby-image"
-
-const ImageContainer = styled.div`
-  text-align: center;
-  width: 100%;
-`
+import Tilt from "react-tilt"
 
 const SitePreview = ({ images }) => {
   return (
-    <ImageContainer>
-      <Carousel fade={true} controls={false} interval={1000} indicators={false}>
-        {images.map(image => (
-          <Carousel.Item key={image.node.base.split(".")[0]}>
+    <Carousel fade={true} controls={false} interval={1000} indicators={false}>
+      {images.map(image => (
+        <Carousel.Item key={image.node.base.split(".")[0]}>
+          <Tilt className="Tilt" options={{ reverse: true, max: 15, scale: 1 }}>
             <Img
               fluid={image.node.childImageSharp.fluid}
               alt={image.node.base.split(".")[0]}
             />
-          </Carousel.Item>
-        ))}
-      </Carousel>
-    </ImageContainer>
+          </Tilt>
+        </Carousel.Item>
+      ))}
+    </Carousel>
   )
 }
 

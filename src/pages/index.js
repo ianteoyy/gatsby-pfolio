@@ -1,17 +1,25 @@
-import React from "react"
-import { Container } from "react-bootstrap"
+import React, { useRef } from "react"
 
-import Layout from "../components/layout"
+import Landing from "../components/Landing"
+import Projects from "../components/Projects"
+import Contact from "../components/Contact"
 import SEO from "../components/seo"
-import AboutMe from "../components/AboutMe"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <Container>
-      <AboutMe />
-    </Container>
-  </Layout>
-)
+const IndexPage = () => {
+  const projectRef = useRef()
+
+  const scrollToProjects = () => {
+    projectRef.current.scrollIntoView({ behaviour: "smooth", block: "start" })
+  }
+
+  return (
+    <>
+      <SEO />
+      <Landing scrollToProjects={scrollToProjects} />
+      <Projects ref={projectRef} />
+      <Contact />
+    </>
+  )
+}
 
 export default IndexPage

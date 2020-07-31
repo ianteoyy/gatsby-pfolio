@@ -1,11 +1,12 @@
-import React from "react"
+import React, { forwardRef } from "react"
 import { graphql, useStaticQuery } from "gatsby"
 
 import { ProjectCard } from "./ProjectCard"
 import Referral from "./Referral"
-import { CardContainer } from "./ProjectsStyles"
+import { CardContainer, ProjectsSection } from "./ProjectsStyles"
+import { Container } from "react-bootstrap"
 
-export const Projects = () => {
+const Projects = forwardRef((props, ref) => {
   const { allFile } = useStaticQuery(graphql`
     {
       allFile(
@@ -33,9 +34,9 @@ export const Projects = () => {
     }
   `)
   return (
-    <>
+    <ProjectsSection ref={ref}>
       <h2>Stuff I've worked on</h2>
-      <CardContainer>
+      <Container>
         <ProjectCard
           title="kuvira-M"
           builtWith={["HTML5", "SCSS", "Bootstrap 4", "jQuery"]}
@@ -45,49 +46,12 @@ export const Projects = () => {
           )}
           tagLine="An online store mockup"
           desc={() => (
-            <>
-              <p>
-                Built this as an interview assignment. I was only allowed to use
-                the Bootstrap 4 and jQuery packages and no others. Site design
-                and layout was provided to me in jpegs so I can't take credit
-                for the design!!
-              </p>
-              <p>
-                Pictures found in{" "}
-                <a
-                  href="https://www.pexels.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  alt="Pexels"
-                >
-                  Pexels
-                </a>
-              </p>
-              <p>
-                <small>
-                  Picture credits: <Referral handleName="@meduzakos" />
-                  <Referral handleName="@steinportraits" />
-                  <Referral handleName="@brunosalvadori" />
-                  <Referral handleName="@mentatdgt-330508" />
-                  <Referral handleName="@wancukz" />
-                  <Referral handleName="@eliasdecarvalho" />
-                  <Referral handleName="@rhiannonstone" />
-                  <Referral handleName="@elijahsad" />
-                  <Referral handleName="@soldiervip" />
-                  <Referral handleName="@pixabay" />
-                  <Referral handleName="@olly" />
-                  <Referral handleName="@myca" />
-                  <Referral handleName="@arnie-chou-304906" />
-                  <Referral handleName="@black-star-151202" />
-                  <Referral handleName="@eulucasqueiroz" />
-                  <Referral handleName="@anastasiya-gepp-654466" />
-                  <Referral handleName="@postiglioni" />
-                  <Referral handleName="@athena" />
-                  <Referral handleName="@ngqah83" />
-                  <Referral handleName="@scottwebb" />
-                </small>
-              </p>
-            </>
+            <p>
+              An online storefront I was assigned to do for a front-end
+              interview. It was done purely in HTML, CSS, and JS without
+              libraries like React. Site design and layout was provided to me in
+              jpegs.
+            </p>
           )}
           git="https://github.com/ianteoyy/kuvira-m"
         />
@@ -102,29 +66,13 @@ export const Projects = () => {
           desc={() => (
             <>
               <p>
-                Another interview assignment! This one involved building a
-                NodeJS backend of my choosing (I went with NestJS, which was new
-                for me) to manage orders and payments.
-              </p>
-              <p>
-                For the database, I used MongoDB Atlas since I figured, "hey two
-                birds with one stone!" So now I have a basic understanding of
-                the MERN stack!
-              </p>
-              <p>
-                If you'd like to check out the code for the NestJS backend,{" "}
-                <a
-                  href="https://github.com/ianteoyy/ordersystem"
-                  target="_blank"
-                  rel="noreferrer"
-                  alt="Order System github"
-                >
-                  here's its Github page.
-                </a>
+                Another interview assignment where I had to build an order and
+                payment system using a NodeJS backend of my choosing. I went
+                with NestJS and MongoDB, both of which were new to me.
               </p>
             </>
           )}
-          git="https://github.com/whoabe/splits-react"
+          git="https://github.com/ianteoyy/orders-react"
         />
         <ProjectCard
           title="Nextagram"
@@ -138,38 +86,20 @@ export const Projects = () => {
             <>
               <p>
                 An Instagram clone single-page-app I built using Next Academy's
-                back-end as part of their React course. My go-to project to
-                alter when learning new things. Started with using class
+                back-end as part of their React course. Started with using class
                 components, now uses mostly hooks!
               </p>
-              <small style={{ fontSize: "0.7rem", marginBottom: "1rem" }}>
-                4/7/2020 update: Now restores user sessions and stores them with
-                Redux!
-              </small>
+              <p style={{ fontSize: "0.7rem", marginBottom: "1rem" }}>
+                  4/7/2020 update: Now restores user sessions and stores them
+                  with Redux!
+              </p>
             </>
           )}
           git="https://github.com/ianteoyy/nextagram"
         />
-        <ProjectCard
-          title="Splits"
-          builtWith={["ReactJS", "Python (Peewee & Flask)", "PostgreSQL"]}
-          link="https://splits.netlify.app"
-          images={allFile.edges.filter(edge =>
-            edge.node.base.startsWith("card-splits")
-          )}
-          tagLine="A simple bill splitter"
-          desc={() => (
-            <>
-              <p>
-                Final project from Next Academy. A simple bill splitter.
-                Back-end built by my teammate using Python, Google Cloud Vision
-                to read the images, and front-end with React.
-              </p>
-            </>
-          )}
-          git="https://github.com/whoabe/splits-react"
-        />
-      </CardContainer>
-    </>
+      </Container>
+    </ProjectsSection>
   )
-}
+})
+
+export default Projects

@@ -1,4 +1,4 @@
-import { Container } from "react-bootstrap"
+import { Row } from "react-bootstrap"
 import styled from "styled-components"
 
 export const ProjectsSection = styled.section`
@@ -10,21 +10,8 @@ export const ProjectsSection = styled.section`
   }
 
   @media (min-width: 992px) {
-    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
   }
-`
-
-export const CardContainer = styled(Container)`
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-`
-
-export const CardBox = styled.div`
-  display: block;
-  font-size: 14px;
-  margin-bottom: 1rem;
-  cursor: pointer;
 `
 
 export const StyledCard = styled.div`
@@ -55,6 +42,5 @@ export const StyledCard = styled.div`
 `
 
 export const Tagline = styled.p`
-  font-size: 0.5em;
-  margin-bottom: unset;
+  font-size: 0.8em;
 `

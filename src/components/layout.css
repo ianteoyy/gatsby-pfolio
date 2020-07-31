@@ -13,9 +13,82 @@ body {
 
 section {
   padding-top: 3rem;
+  text-align: center;
 }
 
-p, small, footer, a, h1, h2, h3, h4, h5 {
+/* Call to Action Button */
+.cta-btn {
+  display: inline-block;
+  position: relative;
+  padding: 0.4rem 1rem;
+  font-weight: bold;
+  line-height: 1;
+  z-index: 1;
+  transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.6s;
+}
+
+.cta-btn::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 0px;
+  height: 100%;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+  transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.3s;
+}
+
+/* Hero Style */
+.cta-btn--hero {
+  background-image: linear-gradient(135deg, #1b1c1e, var(--gray-dark));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  border-width: 2px;
+  border-style: solid;
+  border-image: linear-gradient(135deg, #1b1c1e 0%, var(--gray-dark) 100%);
+  border-image-slice: 1;
+  cursor: pointer;
+}
+
+.cta-btn--hero::after {
+  background-image: linear-gradient(135deg, #1b1c1e, var(--gray-dark));
+}
+
+@media (max-width: 768px) {
+  .cta-btn--hero {
+    background-image: none;
+    border: 2px solid var(--gray-dark);
+    -webkit-text-fill-color: var(--gray-dark);
+  }
+
+  .cta-btn--hero::after {
+    background-image: none;
+  }
+
+  .cta-btn--hero:hover {
+    -webkit-text-fill-color: var(--gray-dark);
+  }
+}
+
+.cta-btn--hero:hover {
+  -webkit-text-fill-color: var(--light);
+  text-decoration: none;
+}
+.cta-btn--hero:hover::after {
+  width: 100%;
+}
+
+p,
+small,
+footer,
+a,
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-family: "Josefin Sans";
 }
 
@@ -211,7 +284,7 @@ html {
 }
 body {
   color: hsla(0, 0%, 0%, 0.8);
-  font-family: "Josefin Sans",georgia, serif;
+  font-family: "Josefin Sans", georgia, serif;
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;
@@ -241,8 +314,9 @@ h1 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-family: "Josefin Sans", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Josefin Sans", -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
   font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 2.25rem;
@@ -258,8 +332,9 @@ h2 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-family: "Josefin Sans", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Josefin Sans", -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
   font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 1.62671rem;
@@ -275,8 +350,9 @@ h3 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-family: "Josefin Sans", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Josefin Sans", -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
   font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 1.38316rem;
@@ -292,8 +368,9 @@ h4 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-family: "Josefin Sans", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Josefin Sans", -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
   font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 1rem;
@@ -309,8 +386,9 @@ h5 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-family: "Josefin Sans", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Josefin Sans", -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
   font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 0.85028rem;
@@ -326,8 +404,9 @@ h6 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-family: "Josefin Sans", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Josefin Sans", -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
   font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 0.78405rem;

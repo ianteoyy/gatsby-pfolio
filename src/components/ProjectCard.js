@@ -1,9 +1,8 @@
-import React, { useState } from "react"
-import { Modal } from "react-bootstrap"
-import { FaExternalLinkAlt } from "react-icons/fa"
+import React from "react"
+import { Row, Col } from "react-bootstrap"
 
 import SitePreview from "./SitePreview"
-import { CardBox, StyledCard, Tagline } from "./ProjectsStyles"
+import { Tagline } from "./ProjectsStyles"
 
 export const ProjectCard = ({
   title,
@@ -14,63 +13,47 @@ export const ProjectCard = ({
   git,
   builtWith,
 }) => {
-  const [showModal, setShowModal] = useState(false)
-
   return (
-    <>
-      <CardBox
-        onClick={() => setShowModal(true)}
-        data-sal="zoom-in"
-        data-sal-easing="ease"
-        data-sal-duration="500"
-      >
-        <StyledCard>
-          <h3>{title}</h3>
-          <SitePreview images={images} />
-          <Tagline>{tagLine}</Tagline>
-        </StyledCard>
-      </CardBox>
-      <Modal show={showModal} onHide={() => setShowModal(prev => !prev)}>
-        <Modal.Header closeButton>
-          <Modal.Title>
-            <h3>{title}</h3>
-            <Tagline>{tagLine}</Tagline>
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <a href={link} target="_blank" rel="noreferrer">
-            <SitePreview images={images} />
-          </a>
-          <hr />
-          <p
-            style={{ fontSize: "0.8em", marginBottom: "0" }}
-            className="text-muted"
-          >
-            Built with: {builtWith.join(", ")}
-          </p>
+    <Row
+      className="p-5"
+      data-sal="zoom-in"
+      data-sal-easing="ease"
+      data-sal-duration="500"
+    >
+      <Col sm={12} lg={4} className="text-left">
+        <h3 className="mb-0">{title}</h3>
+        <Tagline className="mb-3">{tagLine}</Tagline>
+        {desc()}
+        <p
+          style={{ fontSize: "0.8em", marginBottom: "0" }}
+          className="text-muted mb-3"
+        >
+          Built with: {builtWith.join(", ")}
+        </p>
+        <div>
           <a
-            style={{
-              display: "inline-block",
-              fontSize: "0.8em",
-              marginBottom: "1.45rem",
-            }}
+            className="cta-btn cta-btn--hero"
             href={link}
             target="_blank"
             rel="noreferrer"
           >
-            Visit site <FaExternalLinkAlt />
+            View Live
           </a>
-          {desc()}
-        </Modal.Body>
-        <Modal.Footer className="d-flex justify-content-around">
-          <a href={git} target="_blank" rel="noreferrer">
+          <a
+            className="cta-btn text-dark"
+            href={git}
+            target="_blank"
+            rel="noreferrer"
+          >
             Github
           </a>
-          <a href={link} target="_blank" rel="noreferrer">
-            Visit site
-          </a>
-        </Modal.Footer>
-      </Modal>
-    </>
+        </div>
+      </Col>
+      <Col sm={12} lg={8}>
+        <a href={link} target="_blank" rel="noreferrer">
+          <SitePreview images={images} />
+        </a>
+      </Col>
+    </Row>
   )
 }

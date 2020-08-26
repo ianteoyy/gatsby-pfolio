@@ -37,8 +37,26 @@ const Projects = forwardRef((props, ref) => {
       <h2>Stuff I've worked on</h2>
       <Container>
         <ProjectCard
+          title="Volcanic"
+          builtWith={["HTML5", "SCSS", "Bootstrap 4"]}
+          link="https://tyy-volcanic-assessment.netlify.app"
+          images={allFile.edges.filter(edge =>
+            edge.node.base.startsWith("card-volcanic")
+          )}
+          tagLine="A HR platform landing page"
+          desc={() => (
+            <p>
+              An interview assessment that required me to build a landing page
+              out of HTML/CSS/JS. I used a carousel package called SlickJS to
+              handle the carousel. Just prior to this assessment, I watched a video on ::after/::before
+              selectors and applied it to the navbar items as well as the 'Latest Insights' thumbnails!
+            </p>
+          )}
+          git="https://github.com/ianteoyy/volcanic"
+        />
+        <ProjectCard
           title="kuvira-M"
-          builtWith={["HTML5", "SCSS", "Bootstrap 4", "jQuery"]}
+          builtWith={["HTML5", "SCSS", "Bootstrap 4"]}
           link="https://kuvira-M.netlify.app"
           images={allFile.edges.filter(edge =>
             edge.node.base.startsWith("card-kuvira")
@@ -89,8 +107,8 @@ const Projects = forwardRef((props, ref) => {
                 components, now uses mostly hooks!
               </p>
               <p style={{ fontSize: "0.7rem", marginBottom: "1rem" }}>
-                  4/7/2020 update: Now restores user sessions and stores them
-                  with Redux!
+                4/7/2020 update: Now restores user sessions and stores them with
+                Redux!
               </p>
             </>
           )}

@@ -14,7 +14,7 @@ const IndexPage = () => {
 
   return (
     <>
-      <SEO />
+      <SEO title="Projects" />
       <Landing scrollToProjects={scrollToProjects} />
       <Projects ref={projectRef} />
       <Contact />

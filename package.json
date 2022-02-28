@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "ian-teo-portfolio",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "A simple portfolio of mine. Feel free to send an email for any enquiries!",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Ian Teo <teoyeetyang@gmail.com>",
   "dependencies": {
     "babel-plugin-styled-components": "^1.10.7",
     "bootstrap": "^4.5.0",

@@ -75,7 +75,7 @@ const Contact = () => {
       <p>
         Or check out{" "}
         <a
-          href="https://drive.google.com/file/d/15C1FhjP2sgzaKWdrXvkRoul2ckqTJIWQ/view?usp=sharing"
+          href="https://drive.google.com/file/d/18-nxIss9kjQzS2UbL4nXNSUGFIpckh2b/view?usp=sharing"
           target="_blank"
           rel="noreferrer"
         >
